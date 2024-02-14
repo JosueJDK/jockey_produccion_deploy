@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  jockey_geoserver:
+    container_name: jockey_geoserver
+    image: docker.osgeo.org/geoserver:2.24.x
+    ports:
+      - "8080:8080"
+    volumes:
+      - /opt/jockey_geoserver:/opt/geoserver_data

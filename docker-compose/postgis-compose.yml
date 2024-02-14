@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  jockey_postgis:
+    container_name: jockey_postgis
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: luca
+      POSTGRES_DB: jockey
+      POSTGRES_PASSWORD: luca123
+      POSTGRES_HOST: 54.175.246.49
+      POSTGRES_PORT: 5450
+    ports:
+      - "5450:5432"
+    volumes:
+      - jockey_postgis:/var/lib/postgresql/data
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+networks:
+  backend_network:
+
+volumes:
+  jockey_postgis:
